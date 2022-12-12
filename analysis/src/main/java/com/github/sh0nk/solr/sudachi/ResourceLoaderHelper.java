@@ -1,11 +1,11 @@
 package com.github.sh0nk.solr.sudachi;
 
-import org.apache.lucene.analysis.util.ResourceLoader;
-import org.apache.solr.core.SolrResourceLoader;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
+import org.apache.lucene.util.ResourceLoader;
+import org.apache.solr.core.SolrResourceLoader;
 
 public class ResourceLoaderHelper {
 

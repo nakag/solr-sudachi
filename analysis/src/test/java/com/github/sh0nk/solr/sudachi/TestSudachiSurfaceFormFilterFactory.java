@@ -1,18 +1,20 @@
 package com.github.sh0nk.solr.sudachi;
 
-import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.BaseTokenStreamTestCase;
-import org.apache.lucene.analysis.Tokenizer;
-import org.apache.lucene.analysis.core.KeywordTokenizer;
-import org.apache.solr.core.SolrResourceLoader;
-import org.junit.Test;
-
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.Tokenizer;
+import org.apache.lucene.analysis.core.KeywordTokenizer;
+import org.apache.lucene.tests.analysis.BaseTokenStreamTestCase;
+import org.apache.solr.core.SolrResourceLoader;
+import org.junit.Test;
 
 public class TestSudachiSurfaceFormFilterFactory extends BaseTokenStreamTestCase {
     private Analyzer analyzer;
@@ -24,7 +26,7 @@ public class TestSudachiSurfaceFormFilterFactory extends BaseTokenStreamTestCase
         map.put("systemDictDir", dictDir);
         map.put("settingsPath", settingsFile);
         SolrSudachiTokenizerFactory factory = new SolrSudachiTokenizerFactory(map);
-        factory.inform(new SolrResourceLoader());
+        factory.inform(new SolrResourceLoader(Paths.get(URI.create("."))));
         return factory.create(newAttributeFactory());
     }
 

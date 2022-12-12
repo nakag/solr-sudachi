@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>solr-sudachi</artifactId>
+		<groupId>com.github.sh0nk</groupId>
+		<version>9.1.0-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>solr-sudachi-lucene</artifactId>
+
+	<description>This code are based on elasticsearch-sudachi</description>
+
+	<dependencies>
+		<!-- Sudachi -->
+		<dependency>
+			<groupId>com.worksap.nlp</groupId>
+			<artifactId>sudachi</artifactId>
+			<version>${sudachi.version}</version>
+		</dependency>
+		<!-- Lucene/Solr -->
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-analysis-common</artifactId>
+			<version>${lucene.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Test -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>

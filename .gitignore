@@ -28,3 +28,6 @@ target/
 .project
 
 *.DS_Store
+
+sudachi-dictionary*
+/bin/
