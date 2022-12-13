@@ -9,14 +9,14 @@ which includes the common lucene Tokenizer and TokenFilters.
 
 ## Install
 
-1. Edit `properties/solr.version` with your solr's version on `pom.xml` (Default is 6.2.1)
-2. Do `mvn package` to generate `solr-sudachi-assembly-1.0.0-SNAPSHOT.jar` in `assembly/target/`.
-3. Put `solr-sudachi-assembly-1.0.0-SNAPSHOT.jar` on `${SOLR_HOME}/lib` directory.
+1. Edit `properties/solr.version` with your solr's version on `pom.xml` (Default is 9.1.0)
+2. Do `mvn package` to generate `solr-sudachi-assembly-9.1.0-SNAPSHOT.jar` in `assembly/target/`.
+3. Put `solr-sudachi-assembly-9.1.0-SNAPSHOT.jar` on `${SOLR_HOME}/lib` directory.
 4. Configure schema.xml or managed-schema with the following setting, then start solr.
 
 ## Version
 
-Solr 6.2.1 or above.
+Solr 9.1.0 or above.
 
 Note that not all the versions are tested. Please report through issues if any problem found with a version.
 
@@ -33,7 +33,7 @@ Note that not all the versions are tested. Please report through issues if any p
    ...
    
    <tokenizer class="com.github.sh0nk.solr.sudachi.SolrSudachiTokenizerFactory"
-     mode="NORMAL"
+     mode="c"
      discardPunctuation="true"
    />
    
@@ -102,7 +102,7 @@ After the token filter
 <fieldType name="text_ja" class="solr.TextField">
  <analyzer>
    <tokenizer class="com.github.sh0nk.solr.sudachi.SolrSudachiTokenizerFactory"
-     mode="NORMAL"
+     mode="c"
      discardPunctuation="true"
    />
    
@@ -140,17 +140,17 @@ solr-sudachiはluceneのTokenizerやTokenFilterのインターフェイスを提
 ## Install
 
 1. `pom.xml`の中の`properties/solr.version`を、使用するSolrのバージョンに合わせて変更します。
-(デフォルトのバージョンは6.2.1)
-2. `mvn package`を実行すると、`assembly/target/`の中に`solr-sudachi-assembly-1.0.0-SNAPSHOT.jar`が
+(デフォルトのバージョンは9.1.0)
+2. `mvn package`を実行すると、`assembly/target/`の中に`solr-sudachi-assembly-9.1.0-SNAPSHOT.jar`が
 生成されます。
-3. 生成された`solr-sudachi-assembly-1.0.0-SNAPSHOT.jar`を使用するSolrの`${SOLR_HOME}/lib`ディレクトリに
+3. 生成された`solr-sudachi-assembly-9.1.0-SNAPSHOT.jar`を使用するSolrの`${SOLR_HOME}/lib`ディレクトリに
 コピーします。
 4. schema.xmlあるいはmanaged-schemaを、以下の設定にならって編集し、Solrを起動します。
 
 
 ## Version
 
-Solr 6.2.1 以上に対応しています。
+Solr 9.1.0 以上に対応しています。
 
 すべてのバージョンについて正常動作が確認できているわけではありません。特定のバージョンで問題が発生した場合、
 githubのissueを通してご連絡ください。
@@ -168,7 +168,7 @@ githubのissueを通してご連絡ください。
    ...
    
    <tokenizer class="com.github.sh0nk.solr.sudachi.SolrSudachiTokenizerFactory"
-     mode="NORMAL"
+     mode="c"
      discardPunctuation="true"
    />
    
@@ -241,7 +241,7 @@ solr-sudachiはこのファイルを`systemDictDir`にコピーします。も�
 <fieldType name="text_ja" class="solr.TextField">
  <analyzer>
    <tokenizer class="com.github.sh0nk.solr.sudachi.SolrSudachiTokenizerFactory"
-     mode="NORMAL"
+     mode="c"
      discardPunctuation="true"
    />
    
