@@ -31,3 +31,5 @@ target/
 
 sudachi-dictionary*
 /bin/
+*/src/test/resources/system_full.dic
+*/conf/system_full.dic

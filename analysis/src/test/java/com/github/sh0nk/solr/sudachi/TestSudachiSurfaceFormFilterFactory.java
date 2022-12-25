@@ -2,7 +2,6 @@ package com.github.sh0nk.solr.sudachi;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.Collections;
@@ -26,7 +25,8 @@ public class TestSudachiSurfaceFormFilterFactory extends BaseTokenStreamTestCase
         map.put("systemDictDir", dictDir);
         map.put("settingsPath", settingsFile);
         SolrSudachiTokenizerFactory factory = new SolrSudachiTokenizerFactory(map);
-        factory.inform(new SolrResourceLoader(Paths.get(URI.create("."))));
+        
+        factory.inform(new SolrResourceLoader(Paths.get(".")));
         return factory.create(newAttributeFactory());
     }
 
@@ -56,8 +56,8 @@ public class TestSudachiSurfaceFormFilterFactory extends BaseTokenStreamTestCase
 
     @Test
     public void testBasics() throws IOException {
-        assertAnalyzesTo(analyzer, "吾輩は猫である。",
-                new String[] {"吾輩", "は", "猫", "で", "ある"});
+        assertAnalyzesTo(analyzer, "私は猫である。",
+                new String[] {"私", "は", "猫", "で", "ある"});
     }
 
     @Test

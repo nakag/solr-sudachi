@@ -1,10 +1,12 @@
 package com.github.sh0nk.solr.sudachi;
 
 
+import static org.apache.lucene.tests.analysis.BaseTokenStreamTestCase.assertTokenStreamContents;
+import static org.apache.lucene.tests.analysis.BaseTokenStreamTestCase.newAttributeFactory;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
-import java.net.URI;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.HashMap;
@@ -14,8 +16,6 @@ import org.apache.lucene.analysis.Tokenizer;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.core.SolrResourceLoader;
 import org.junit.Test;
-import static org.apache.lucene.tests.analysis.BaseTokenStreamTestCase.assertTokenStreamContents;
-import static org.apache.lucene.tests.analysis.BaseTokenStreamTestCase.newAttributeFactory;
 
 public class TestSolrSudachiTokenizerDictAssembly extends SolrTestCaseJ4 {
 
@@ -23,7 +23,7 @@ public class TestSolrSudachiTokenizerDictAssembly extends SolrTestCaseJ4 {
         // Load from bundled dictionary
         Map<String, String> map = new HashMap<>(args);
         SolrSudachiTokenizerFactory factory = new SolrSudachiTokenizerFactory(map);
-        factory.inform(new SolrResourceLoader(Paths.get(URI.create("."))));
+        factory.inform(new SolrResourceLoader(Paths.get(".")));
         return factory.create(newAttributeFactory());
     }
 
@@ -46,9 +46,9 @@ public class TestSolrSudachiTokenizerDictAssembly extends SolrTestCaseJ4 {
         initCore();
 
         Tokenizer tokenizer = createTokenizer(Collections.emptyMap());
-        tokenizer.setReader(new StringReader("吾輩は猫である。"));
+        tokenizer.setReader(new StringReader("私は猫である。"));
         assertTokenStreamContents(tokenizer,
-                new String[] {"我が輩", "は", "猫", "だ", "有る"}
+                new String[] {"私", "は", "猫", "だ", "有る"}
         );
     }
 
@@ -59,9 +59,9 @@ public class TestSolrSudachiTokenizerDictAssembly extends SolrTestCaseJ4 {
         Map<String, String> args = new HashMap<>();
         args.put("settingsPath", "solr_sudachi.json");
         Tokenizer tokenizer = createTokenizer(args);
-        tokenizer.setReader(new StringReader("吾輩は猫である。"));
+        tokenizer.setReader(new StringReader("私は猫である。"));
         assertTokenStreamContents(tokenizer,
-                new String[] {"我が輩", "は", "猫", "だ", "有る"}
+                new String[] {"私", "は", "猫", "だ", "有る"}
         );
     }
 
@@ -73,9 +73,9 @@ public class TestSolrSudachiTokenizerDictAssembly extends SolrTestCaseJ4 {
         String dir = createTempDir().toString();
         args.put("systemDictDir", dir);
         Tokenizer tokenizer = createTokenizer(args);
-        tokenizer.setReader(new StringReader("吾輩は猫である。"));
+        tokenizer.setReader(new StringReader("私は猫である。"));
         assertTokenStreamContents(tokenizer,
-                new String[] {"我が輩", "は", "猫", "だ", "有る"}
+                new String[] {"私", "は", "猫", "だ", "有る"}
         );
     }
 

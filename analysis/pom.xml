@@ -8,9 +8,7 @@
 		<version>9.1.0-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-
 	<artifactId>solr-sudachi-analysis</artifactId>
-
 	<dependencies>
 		<!-- Sudachi -->
 		<dependency>
@@ -25,22 +23,28 @@
 		</dependency>
 		<!-- Lucene/Solr -->
 		<dependency>
-		    <groupId>org.apache.lucene</groupId>
-		    <artifactId>lucene-core</artifactId>
-		    <version>${lucene.version}</version>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-core</artifactId>
+			<version>${lucene.version}</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-backward-codecs</artifactId>
+			<version>${lucene.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-analysis-common</artifactId>
 			<version>${lucene.version}</version>
-			<scope>provided</scope>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-test-framework</artifactId>
 			<version>${lucene.version}</version>
-			<scope>provided</scope>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.solr</groupId>
@@ -48,7 +52,6 @@
 			<version>${solr.version}</version>
 			<scope>provided</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
@@ -59,7 +62,6 @@
 			<artifactId>commons-lang</artifactId>
 			<version>${commons-lang.version}</version>
 		</dependency>
-
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -67,19 +69,13 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
-
 	<build>
 		<testResources>
-			<!--<testResource> -->
-			<!--<directory>${project.basedir}/src/test/resources</directory> -->
-			<!--</testResource> -->
 			<testResource>
 				<directory>${project.basedir}/src/test/resources</directory>
 			</testResource>
 		</testResources>
-
 		<plugins>
 			<!-- For assembly/test with a real dictionary -->
 			<plugin>
@@ -97,19 +93,38 @@
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>com.googlecode.maven-download-plugin</groupId>
+				<artifactId>download-maven-plugin</artifactId>
+				<version>${download-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>install-fulldic</id>
+						<phase>generate-test-resources</phase>
+						<goals>
+							<goal>wget</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<url>http://sudachi.s3-website-ap-northeast-1.amazonaws.com/sudachidict/sudachi-dictionary-${dict.version}-full.zip</url>
+					<unpack>true</unpack>
+					<outputDirectory>src/test/</outputDirectory>
+				</configuration>
+			</plugin>
+			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 				<executions>
 					<execution>
 						<id>copy-resource-one</id>
-						<phase>generate-sources</phase>
+						<phase>generate-test-resources</phase>
 						<goals>
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
+							<outputDirectory>${project.basedir}/src/test/resources</outputDirectory>
 							<resources>
 								<resource>
-									<directory>../assembly/src/main/sudachi-dictionary-${dict.version}</directory>
+									<directory>src/test/sudachi-dictionary-${dict.version}</directory>
 									<includes>
 										<include>**/*.dic</include>
 									</includes>
@@ -121,5 +136,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
