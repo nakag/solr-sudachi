@@ -33,7 +33,7 @@ Note that not all the versions are tested. Please report through issues if any p
    ...
    
    <tokenizer class="com.github.sh0nk.solr.sudachi.SolrSudachiTokenizerFactory"
-     mode="c"
+     mode="NORMAL"
      discardPunctuation="true"
    />
    
@@ -102,7 +102,7 @@ After the token filter
 <fieldType name="text_ja" class="solr.TextField">
  <analyzer>
    <tokenizer class="com.github.sh0nk.solr.sudachi.SolrSudachiTokenizerFactory"
-     mode="c"
+     mode="NORMAL"
      discardPunctuation="true"
    />
    
@@ -168,7 +168,7 @@ githubのissueを通してご連絡ください。
    ...
    
    <tokenizer class="com.github.sh0nk.solr.sudachi.SolrSudachiTokenizerFactory"
-     mode="c"
+     mode="NORMAL"
      discardPunctuation="true"
    />
    
@@ -241,7 +241,7 @@ solr-sudachiはこのファイルを`systemDictDir`にコピーします。も�
 <fieldType name="text_ja" class="solr.TextField">
  <analyzer>
    <tokenizer class="com.github.sh0nk.solr.sudachi.SolrSudachiTokenizerFactory"
-     mode="c"
+     mode="NORMAL"
      discardPunctuation="true"
    />
    
