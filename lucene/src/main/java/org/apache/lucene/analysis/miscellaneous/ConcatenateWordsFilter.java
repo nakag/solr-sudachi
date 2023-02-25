@@ -6,12 +6,14 @@ import org.apache.lucene.analysis.TokenFilter;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
+import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
 import org.apache.lucene.analysis.tokenattributes.PositionLengthAttribute;
 
 public final class ConcatenateWordsFilter extends TokenFilter {
 	private CharTermAttribute charTermAttribute = addAttribute(CharTermAttribute.class);
 	private OffsetAttribute offsetAttribute = addAttribute(OffsetAttribute.class);
 	private PositionLengthAttribute positionLengthAttribute = addAttribute(PositionLengthAttribute.class);
+	private PositionIncrementAttribute positionIncrementAttribute = addAttribute(PositionIncrementAttribute.class);
 	private StringBuilder stringBuilder = new StringBuilder();
 	private State savedState = null;
 	private boolean exhausted = false;
@@ -30,6 +32,7 @@ public final class ConcatenateWordsFilter extends TokenFilter {
 			lastEndOffset = offsetAttribute.endOffset();
 			if (positionLength == 1) {
 				stringBuilder.append(terms, 0, termLength);
+				positionIncrementAttribute.setPositionIncrement(1);
 			}
 			if (savedState == null) {
 				savedState = captureState();
